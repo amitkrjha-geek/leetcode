@@ -1,16 +1,18 @@
 class Solution {
 public:
-    int climbStairs(int n) {
- //    vector<int>dp(n+1,0);
-  //  dp[0] = 1;                                 
-  //  dp[1] = 1;
-        int a=1,b=1,c=0;
-    for(int i=2;i<=n;i++){
-       // dp[i] = dp[i-2] + dp[i-1]; 
-        c=a+b;
-        a=b;
-        b=c;
+    int dp[10000];
+    int topdown(int n)
+    {
+        if(n==0)return 1;
+        if(n<0)return 0;
+        
+        if(dp[n]!=0)return dp[n];
+        dp[n]=topdown(n-1)+topdown(n-2);
+        return dp[n];
+        
     }
-    return b;        
+    int climbStairs(int n) {
+        memset(dp,0,sizeof(dp));
+        return topdown(n);
     }
 };
