@@ -1,22 +1,17 @@
 class Solution {
 public:
-    int maxAreaOfIsland(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size(), ans = 0;
-        for (int i = 0; i < m; i++) 
-            for (int j = 0; j < n; j++) 
-                if (grid[i][j] == 1) ans = max(ans, dfs(grid, i, j));
-        return ans;
+ int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int max_area = 0;
+        for(int i = 0; i < grid.size(); i++)
+            for(int j = 0; j < grid[0].size(); j++)
+                if(grid[i][j] == 1)max_area = max(max_area, AreaOfIsland(grid, i, j));
+        return max_area;
     }
-private:
-    int dfs(vector<vector<int>>& grid, int row, int col) {
-        int m = grid.size(), n = grid[0].size(), area = 1;
-        grid[row][col] = 2;
-        vector<int> dir({-1,0,1,0,-1});
-        for (int i = 0; i < 4; i++) {
-            int r = row+dir[i], c = col+dir[i+1];
-            if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] == 1) 
-                area += dfs(grid, r, c);
+    
+    int AreaOfIsland(vector<vector<int>>& grid, int i, int j){
+        if( i >= 0 && i < grid.size() && j >= 0 && j < grid[0].size() && grid[i][j] == 1){
+            grid[i][j] = 0;
+            return 1 + AreaOfIsland(grid, i+1, j) + AreaOfIsland(grid, i-1, j) + AreaOfIsland(grid, i, j-1) + AreaOfIsland(grid, i, j+1);
         }
-        return area;
-    }
-};
+        return 0;
+    }};
