@@ -1,16 +1,15 @@
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
-        
-         vector<int> vi(rowIndex + 1);
-       	vi[0] = 1;
-        for (int i = 0; i <= rowIndex ; ++i)
-        {
-        	for (int j = i; j > 0; --j)
-        	{
-	        	vi[j] = vi[j] + vi[j-1];
-        	}
-        }
-        return vi;
+        vector<int> row;
+            if(rowIndex < 0) {
+            	return row;
+            }
+            row.resize(rowIndex + 1);
+            row[0] = row[rowIndex] = 1;
+            for(int m =1; m < rowIndex /2 + 1; m++) {
+            	row[m] = row[rowIndex - m] = ((long long int)row[m - 1] * (rowIndex - m + 1)) / m;
+            }
+            return row;
     }
 };
