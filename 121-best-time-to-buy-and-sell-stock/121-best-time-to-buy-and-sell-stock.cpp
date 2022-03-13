@@ -1,20 +1,15 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int n=prices.size();
-        int ma=0;
-        vector<int>suffixmax(n);
-        suffixmax[n-1]=prices[n-1];
-        for(int i=n-1;i>=1;i--)
+        int profit=0;
+        int running_min=prices[0];
+        for(int i=1;i<prices.size();i++)
         {
-            suffixmax[i-1]=max(suffixmax[i],prices[i-1]);
+            profit=max(profit,prices[i]-running_min);
+            running_min=min(running_min,prices[i]);
         }
-        for(int i=0;i<prices.size();i++)
-        {
-          
-            ma=max(ma,suffixmax[i]-prices[i]);
-            cout<<suffixmax[i];
-        }
-        return ma;
+         profit=max(profit,prices[prices.size()-1]-running_min);
+        return profit;
+
     }
 };
