@@ -1,12 +1,12 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-         vector<vector<int> > ret( n, vector<int>(n) );
+          vector<vector<int> > ret( n, vector<int>(n) );
         	int k = 1, i = 0;
         	while( k <= n * n )
         	{
         		int j = i;
-                    
+                    // four steps
         		while( j < n - i )             // 1. horizonal, left to right
         			ret[i][j++] = k++;
         		j = i + 1;
@@ -18,7 +18,7 @@ public:
         		j = n - i - 1;
         		while( j > i )                  // 4. vertical, bottom to  top 
         			ret[j--][i] = k++;
-        		i++;      
+        		i++;      // next loop
         	}
         	return ret;
     }
