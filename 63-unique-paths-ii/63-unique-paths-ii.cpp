@@ -1,4 +1,4 @@
-class Solution {
+                   class Solution {
 public:
           int path(vector<vector<int>>& obstacleGrid, int m, int n, int a, int b,vector<vector<int>>&dp)
     {
