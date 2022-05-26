@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>>result;
+  vector<vector<int>>result;
     vector<int>s;
     void p(vector<int>&nums,int j,int n)
     {
@@ -23,4 +23,5 @@ public:
         p(nums,0,n);
         return result;
     }
+
 };
