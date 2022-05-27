@@ -13,8 +13,8 @@ public:
             if(k<p.length()-1){
                 if(p[k+1]=='*'){
                     int opt1 = helper(s,p,i,k+2,dp);
-                    int opt2 =(match and helper(s,p,i+1,k,dp));
-                    return dp[i][k] =(opt1 or opt2);
+                    int opt2 =(match && helper(s,p,i+1,k,dp));
+                    return dp[i][k] =(opt1 || opt2);
                 }
             }
             if(match) return dp[i][k] = helper(s,p,i+1,k+1,dp);
