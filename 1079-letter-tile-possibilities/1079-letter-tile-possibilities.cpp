@@ -1,30 +1,21 @@
 class Solution {
 public:
-    set<string> s;
-    void solve(string& str, string& t, set<int> &ns)
+    void backtrack(string tiles, int level, int &count)
     {
-        s.insert(str);
-        for(int i=0; i<t.size(); i++)
-        {
-            if(ns.find(i)!=ns.end()) continue;
-            str+=t[i];
-            ns.insert(i);
-            solve(str,t,ns);
-            str.pop_back();
-            ns.erase(i);
+        count++;
+        for(int i=level; i<tiles.length(); i++){
+            
+            if(i!=level && tiles[i]==tiles[level])
+                continue;   // to skip same characters
+            swap(tiles[i], tiles[level]);
+            backtrack(tiles, level+1, count);
         }
     }
     int numTilePossibilities(string t) {
+        int c=0;
         sort(t.begin(),t.end());
-        for(int i=0;i<t.size();i++)
-        {
-            if(i && t[i]==t[i-1]) continue;
-            set<int> ns;
-            ns.insert(i);
-            string k; k+=t[i];
-            solve(k,t,ns);
-        }
-        return s.size();
+        backtrack(t,0,c);
+        return c-1;
     }
 
 };
