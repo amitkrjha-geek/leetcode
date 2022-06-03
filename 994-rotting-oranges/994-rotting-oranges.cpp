@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int orangesRotting(vector<vector<int>>& grid) {
+ int orangesRotting(vector<vector<int>>& grid) {
         int ct=0, res=-1;
         queue<vector<int>> q;
         vector<vector<int>> dir={{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
