@@ -1,12 +1,10 @@
 class Solution {
 public:
-    int uniquePaths(int m, int n) {
-      long long int ans = 1;
-        if(m>n) return uniquePaths(n,m);
-        
-        for(int i=0;i<m-1;i++){
-            ans = (ans*(m+n-2 - i))/(i+1);
-        }
-        return ans;
+     int dp[101][101]{};
+    int uniquePaths(int m, int n, int i = 0, int j = 0) {
+        if(i >= m || j >= n) return 0;
+        if(i == m-1 && j == n-1) return 1;
+        if(dp[i][j]) return dp[i][j];
+        return dp[i][j] = uniquePaths(m, n, i+1, j) + uniquePaths(m, n, i, j+1);
     }
 };
