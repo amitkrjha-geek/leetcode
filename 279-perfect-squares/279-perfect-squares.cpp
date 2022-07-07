@@ -1,27 +1,30 @@
 class Solution {
 public:
-    int minSteps(int n,int* memo){
-        //Base Case
-        if(n==0)
+    int memo(int n,vector<int>&dp)
+    {
+        if(n==0){
             return 0;
-        
-        if(memo[n]!=-1)return memo[n];
-        int num=sqrt(n);
-        int ans=INT_MAX;
-        while(num>=sqrt(n)/2){
-            int op=minSteps(n-num*num,memo);
-            ans=min(ans,op);
-            if(op<=1)break; 
-            num--;
         }
-        memo[n]=1+ans;
-        return 1+ans;
+        
+        if(dp[n]!=-1){
+            return dp[n];
+        }
+        
+        int mini=INT_MAX;
+        for(int i=1;i*i<=n;i++){
+            int ans=memo(n-i*i,dp);
+            mini=min(1+ans,mini);
+        }
+        
+        return dp[n]=mini;
     }
     int numSquares(int n) {
-        int* memo=new int[n+1];
-        for(int i=0;i<=n;i++){
-            memo[i]=-1;
-        }
-        return minSteps(n,memo);
+       // vector<int>sq;
+        //for(int i=1;i*i<n;i++)
+           // sq.push_back(i*i);
+        vector<int>dp(n+1,-1);
+        return memo(n,dp);
+        
+        
     }
 };
