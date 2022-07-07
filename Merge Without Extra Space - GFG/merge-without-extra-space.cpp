@@ -10,18 +10,18 @@ class Solution{
         void merge(long long arr1[], long long arr2[], int n, int m) 
         { 
             // code here 
-            int arr[n+m];
-    for(int i=0;i<n;i++)arr[i]=arr1[i];
-    for(int i=0;i<m;i++)
-    {
-        arr[i+n]=arr2[i];
-    }
-    sort(arr,arr+n+m);
-    for(int i=0;i<n;i++)arr1[i]=arr[i];
-    for(int i=0;i<m;i++)
-    {
-        arr2[i]=arr[i+n];
-    }
+    for(long long first=n-1,second=0;first>=0&&second<m;first--,second++)
+           {
+               if(arr1[first]>=arr2[second])
+               {
+                   swap(arr1[first],arr2[second]);
+               }
+               else
+               break;
+               
+           }
+           sort(arr1,arr1+n);
+           sort(arr2,arr2+m);
         } 
 };
 
