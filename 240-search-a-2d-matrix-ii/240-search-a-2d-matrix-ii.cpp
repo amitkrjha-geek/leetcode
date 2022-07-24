@@ -1,15 +1,22 @@
 class Solution {
 public:
-    bool searchMatrix(vector<vector<int>>& mt, int t) {
-        int n=mt.size();
-        int m=mt[0].size();
-        int i=0,j=m-1;
-        while(i<n&&j>=0)
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+        int j=m-1;
+        int i=0;
+        while(j>=0&&i<n)
         {
-            if(mt[i][j]==t)return true;
-            if(mt[i][j]>t)j--;
-            else i++;
+            int a=matrix[i][j];
+            if(a==target)
+                return true;
+            if(a>target)
+               {
+                   j--;
+               }
+               else i++;
         }
-        return false;
+                              return false;
+
     }
 };
