@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
+     vector<int> searchRange(vector<int>& nums, int target) {
         int idx1 = lower_bound(nums, target);
     int idx2 = lower_bound(nums, target+1)-1;
     if (idx1 < nums.size() && nums[idx1] == target)
