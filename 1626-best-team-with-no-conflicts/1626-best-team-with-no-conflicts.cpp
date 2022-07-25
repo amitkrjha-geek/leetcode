@@ -1,29 +1,24 @@
 class Solution {
 public:
-    int dp[1005][1005];
-    // transform in 2-d lcs
     int bestTeamScore(vector<int>& scores, vector<int>& ages) {
-        vector<vector<int>>grp;
-        for(int i=0;i<scores.size();i++)
-        {
-            grp.push_back({scores[i],ages[i]});
+         int n = scores.size();
+        vector<pair<int, int>> players;
+        for(int i = 0; i < n; i++) {
+            players.push_back({ages[i], scores[i]});
         }
-        sort(grp.begin(),grp.end());     
-        memset(dp,-1,sizeof(dp));
-        return recur(grp,0,ages.size(),0);
-    }
-    
-    int recur(vector<vector<int>>&grp , int i , int n , int maxiAge)
-    {
-        if(i==n)
-            return 0;
-        if(dp[i][maxiAge]!=-1)
-            return dp[i][maxiAge];
-        
-        if(grp[i][1]>=maxiAge)
-        {
-            return dp[i][maxiAge] = max(grp[i][0]+recur(grp,i+1,n,grp[i][1]),recur(grp,i+1,n,maxiAge));
+        sort(players.begin(), players.end());
+        int dp[n]; 
+        dp[0] = players[0].second;
+        for(int i = 1; i < n; i++) {
+            dp[i] = players[i].second;
+            for(int j = i - 1; j >= 0; j--) {
+                if(players[j].first == players[i].first) {
+                    dp[i] = max(dp[i], players[i].second + dp[j]);
+                } else if(players[j].second <= players[i].second) {
+                    dp[i] = max(dp[i], players[i].second + dp[j]);
+                }
+            }
+           
         }
-        return dp[i][maxiAge] = recur(grp,i+1,n,maxiAge);
-    }
+         return *max_element(dp,dp+n);}
 };
