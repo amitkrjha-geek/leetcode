@@ -1,6 +1,6 @@
 class AuthenticationManager {
 public:
-    map<string,int>m;
+     map<string,int>m;
     int ttl;
     AuthenticationManager(int t) {
         ttl=t;
