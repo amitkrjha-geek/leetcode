@@ -1,37 +1,37 @@
 class Solution {
 public:
-    int networkDelayTime(vector<vector<int>>& times, int N, int K) {
-         vector<pair<int,int>> g[N+1];
-        
+    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+       vector<int>dist(n+1,INT_MAX);
+        vector<vector<pair<int,int>>>adj(n+1);
         for(int i=0;i<times.size();i++)
-            g[times[i][0]].push_back(make_pair(times[i][1],times[i][2]));
-        vector<int> dist(N+1, 1e9);
-        dist[K] = 0;
-        priority_queue<pair<int,int>, vector<pair<int,int>> , greater<pair<int,int>>> q;
-        q.push(make_pair(0,K));
-        pair<int,int> temp;
-        bool visit[N+1];
-        memset(visit, false, sizeof(visit));
-        while(!q.empty()){
-            temp = q.top();
+        {
+            adj[times[i][0]].push_back({times[i][1],times[i][2]});
+        }
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>q;
+        q.push({0,k});
+        dist[k]=0;
+        while(!q.empty())
+        {
+            int prev=q.top().second;
             q.pop();
-            int u = temp.second;
-            visit[u] = true;
-            for(int i=0;i<g[u].size();i++){
-                int v = g[u][i].first;
-                int weight = g[u][i].second;
-                if(visit[v]==false && dist[v] > dist[u] + weight){
-                    dist[v] = dist[u] + weight;
-                    q.push(make_pair(dist[v], v));
+            for(pair<int,int>it:adj[prev])
+            {
+                int nextdis=it.second;
+                int next=it.first;
+                if(dist[next]>dist[prev]+nextdis)
+                {
+                    dist[next]=dist[prev]+nextdis;
+                    q.push({dist[next],next});
                 }
             }
         }
-        int ans = 0;
-        for(int i=1;i<dist.size();i++){
-            ans = max(ans, dist[i]);
+        int res=INT_MIN;
+        for(int i=1;i<=n;i++)
+        {
+            if(i!=k&&dist[i]==INT_MAX)return -1;
+            else res=max(res,dist[i]);
         }
-        if(ans==1e9) return -1;
-        return ans;
-    
+        return res;
     }
 };
