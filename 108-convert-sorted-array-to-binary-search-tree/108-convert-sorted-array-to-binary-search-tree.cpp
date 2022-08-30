@@ -11,23 +11,19 @@
  */
 class Solution {
 public:
-   TreeNode* TreeFormation(vector<int> nums, int start, int end){
-    if(start>end)
-        return NULL;
-    
-    int mid = (start+end)/2;
-    
-    TreeNode* root = new TreeNode(nums[mid]);
-    
-    root->left = TreeFormation(nums, start, mid-1);
-    
-    root->right = TreeFormation(nums, mid+1, end);
-    
-    return root;
-}
-
-TreeNode* sortedArrayToBST(vector<int>& nums) {
-    TreeNode *root = TreeFormation(nums, 0, nums.size()-1);
-    return root;
-}
+    TreeNode* formation(vector<int>&nums,int start,int end)
+    {
+        if(start>end)return NULL;
+        int mid=(start+end)/2;
+        TreeNode* root=new TreeNode(nums[mid]);
+        root->left=formation(nums,start,mid-1);
+        root->right=formation(nums,mid+1,end);
+        return root;
+        
+        
+    }
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        return formation(nums,0,nums.size()-1);
+        
+    }
 };
