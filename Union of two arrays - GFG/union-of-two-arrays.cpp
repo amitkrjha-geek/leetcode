@@ -14,7 +14,7 @@ class Solution{
         //code here
         set<int>s;
         for(int i=0;i<n;i++)s.insert(a[i]);
-        for(int i=0;i<m;i++)s.insert(b[i]);
+        for(int j=0;j<m;j++)s.insert(b[j]);
         return s.size();
     }
 };
