@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for C++
 
 #include<bits/stdc++.h>
@@ -11,7 +11,7 @@ for (int i=0; i < size; i++)
 }
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 //User function Template for C++
 
 
@@ -21,20 +21,14 @@ class Solution
     //Function to merge k sorted arrays.
     vector<int> mergeKArrays(vector<vector<int>> arr, int k)
     {
-        priority_queue<int,vector<int>,greater<int>> q;
-       for(auto i:arr){
-           for(auto j:i) q.push(j);
-       }
-       vector<int> ans(k*k);
-       for(int i=0;i< k*k;i++){
-           ans[i]=q.top();
-           q.pop();
-       }
-       return ans;//code here
+        //code here
+        vector<int>v;
+        for(int i=0;i<k;i++)for(int j=0;j<k;j++)v.push_back(arr[i][j]);
+        sort(v.begin(),v.end());return v;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main()
 {
@@ -62,4 +56,5 @@ int main()
 
 
 
-  // } Driver Code Ends
+
+// } Driver Code Ends
